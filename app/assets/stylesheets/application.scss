@@ -20,3 +20,17 @@
 body {
   padding-top: 20px;
 }
+
+input.btn, button.btn{
+  margin-right: 5px !important;
+}
+
+
+// simple form
+.form-horizontal {
+  div.checkbox.inline {
+    .control-label {
+      text-align: left;
+    }
+  }
+}

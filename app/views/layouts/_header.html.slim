@@ -6,26 +6,28 @@
         span.icon-bar
         span.icon-bar
         span.icon-bar
-      a.navbar-brand href="#" Manoa
-    div.collapse.navbar-collapse#bs-example-navbar-collapse-1
-      ul.nav.navbar-nav.navbar-right
+      a.navbar-brand href="#{root_path}" Manoa
+    .collapse.navbar-collapse#bs-example-navbar-collapse-1
+      ul.nav.navbar-nav
         = nav_link('Home', root_path)
-        = nav_link('About', contact_index_path)
+        = nav_link('About', about_index_path)
         = nav_link('Contact', contact_index_path)
-        / li.dropdown
-        /   a.dropdown-toggle href="#" data-toggle="dropdown" role="button" aria-expanded="false"
-        /     | Dropdown 
-        /     span.caret
-        /   ul.dropdown-menu role="menu"
-        /     li
-        /       a href="#" Home
-        /     li
-        /       a href="#" About
-        /     li
-        /       a href="#" Contact
-        /     li.divider
-        /     li
-        /       a href="#" Separated link
+      ul.nav.navbar-nav.navbar-right
+        - if !user_signed_in?
+          = nav_link('Login', new_user_session_path)
+          = nav_link('Sign up', new_user_registration_path)
+        - if user_signed_in?
+          li.dropdown
+            a.dropdown-toggle href="#" data-toggle="dropdown" role="button" aria-expanded="false"
+              = current_user.email
+              span.caret
+            ul.dropdown-menu role="menu"
+              li
+                a href="#" My Profile
+              li
+                a href="#" My Company
+              li.divider
+              = nav_link('Sign Out', destroy_user_session_path, :delete)
       / form.navbar-form.navbar-left role="search"
       /   div.form-group
       /     input.form-control type="text" placeholder="Search"
